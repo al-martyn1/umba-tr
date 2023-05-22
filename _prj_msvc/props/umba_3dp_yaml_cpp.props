@@ -1,0 +1,28 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- 
+      Set up user/system environment vars:
+      YAML_CPP_BUILT_ROOT=F:\_github\forks-jbeder-yaml-cpp
+    -->
+
+  <PropertyGroup>
+    <YAML_CPP_INC>$(YAML_CPP_BUILT_ROOT)\include</YAML_CPP_INC>
+    <YAML_CPP_LIB>$(YAML_CPP_BUILT_ROOT)\.out\$(UMBA_TOOLSET_PLATFORM_CONFIG_ROOT)</YAML_CPP_LIB>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Natvis Include="$(YAML_CPP_BUILT_ROOT)\src\contrib\yaml-cpp.natvis" />
+  </ItemGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(YAML_CPP_INC);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(YAML_CPP_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>yaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+
+</Project>
