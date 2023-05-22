@@ -1,1 +1,8 @@
 /_prj_msvc/*.user
+_libs/encoding
+_libs/marty_cpp
+_libs/marty_tr
+_libs/marty_yaml_toml_json
+_libs/sfmt
+_libs/umba
+
