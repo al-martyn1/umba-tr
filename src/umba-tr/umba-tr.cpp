@@ -77,7 +77,7 @@ bool bOverwrite    = false;
 bool bForce        = false;
 
 std::string               outputFilename;
-std::string               substSategoryName;
+std::string               substCategoryName;
 marty_tr::ELangTagFormat  langTagFormat = marty_tr::ELangTagFormat::langIdFull; // langId;
 //bool        substSategory = false;
 
@@ -321,10 +321,28 @@ int main(int argc, char* argv[])
         }
 
         std::string fileCatId = umba::filename::getPathFile(relFileName);
+        if (marty_tr::getLocaleInfo(umba::filename::getName(fileCatId), true /* neutralAllowed */))
+        {
+            fileCatId = umba::filename::getPath(fileCatId); // Локаль была найдена как последний компонент пути (имя файла) - обрезаем
+        }
+        else
+        {
+            // Локаль в имени файла, отделена символом подчеркивания
+            std::string::size_type pos = fileCatId.rfind('_');
+            if (pos!=fileCatId.npos && marty_tr::getLocaleInfo(umba::filename::getName(std::string(fileCatId, pos+1, std::string::npos)), true /* neutralAllowed */))
+            {
+                fileCatId = std::string(fileCatId, 0, pos);
+            }
+        }
+        
         if (!argsParser.quet)
         {
             // LOG_MSG_OPT << "File category ID: '" << fileCatId << "'" << "\n";
         }
+
+        
+
+        // fileCatId
 
 
         size_t bomSize = 0;
@@ -353,10 +371,10 @@ int main(int argc, char* argv[])
             errCount++;
         }
 
-        if (!marty_tr::tr_replace_category(trMap, substSategoryName, fileCatId))
+        if (!marty_tr::tr_replace_category(trMap, substCategoryName, fileCatId))
         {
             LOG_ERR << umba::formatMessage("failed to rename category '$(categoryFrom)' to '$(categoryTo)' - category '$(categoryTo)' already exist")
-                                          .arg("categoryFrom",substSategoryName.empty() ? std::string("<EMPTY>") : substSategoryName)
+                                          .arg("categoryFrom",substCategoryName.empty() ? std::string("<EMPTY>") : substCategoryName)
                                           .arg("categoryTo",fileCatId)
                                           .toString()
                     << "\n";

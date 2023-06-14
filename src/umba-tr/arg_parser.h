@@ -157,7 +157,7 @@ int operator()( const std::string                               &a           //!
                 return -1;
             }
             
-            substSategoryName = strVal;
+            substCategoryName = strVal;
             return 0;
         }
 
