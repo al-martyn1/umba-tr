@@ -217,7 +217,7 @@ int main(int argc, char* argv[])
     }
     #endif
 
-    unsigned errCount;
+    unsigned errCount = 0;
 
 
     marty_tr::tr_set_lang_tag_format(langTagFormat);
@@ -240,7 +240,8 @@ int main(int argc, char* argv[])
                                                             .toString()
                                       ; // << "\n";
 
-                              errCount++;
+                              // need warning as error
+                              // errCount++;
 
                               return true; // allow overwite prev translation
                           }
@@ -253,7 +254,8 @@ int main(int argc, char* argv[])
                                                                        .toString()
                                                  << "\n";
 
-                              errCount++;
+                              // need warning as error
+                              // errCount++;
                           }
                           ,
                           [&](const std::string& lang, const std::string& langTag) // messageMissingTranslation
@@ -274,18 +276,15 @@ int main(int argc, char* argv[])
                                                  << "\n";
                               }
 
+                              // need warning as error
+                              // errCount++;
                           }
 
                 );
 
-
-
     // virtual void messageNotFullyTranslated(const std::string& msgId, const std::string& catId) = 0;
     //  
     // virtual void messageMissingTranslation(const std::string& lang, const std::string& lanfTag) = 0;
-
-
-
 
 
     marty_tr::tr_set_err_handler(&errReportHandler);
@@ -467,6 +466,13 @@ int main(int argc, char* argv[])
 
     marty_tr::tr_check_translation_completeness();
 
+    // if (!argsParser.quet)
+    // {
+    //     LOG_MSG_OPT << umba::formatMessage("Processing '$(fileName)'")
+    //                                       .arg("fileName",fileName)
+    //                                       .toString()
+    //                 << "\n";
+    // }
 
     if (!errCount || bForce)
     {
@@ -487,6 +493,12 @@ int main(int argc, char* argv[])
     
             return 1;
         }
+    }
+    else
+    {
+        LOG_ERR << umba::formatMessage("some errors occur, output not written")
+                                      .toString()
+                << "\n";
     }
 
     //TODO: !!! если файл существует, его надо обнулить
