@@ -202,6 +202,29 @@ int operator()( const std::string                               &a           //!
             return 0;
         }
 
+        else if ( opt.setParam("INDENT",2)
+               || opt.isOption("json-indent") || opt.isOption("indent")
+               // || opt.setParam("VAL",true)
+               || opt.setDescription("Set indent for nesting levels in final JSON."))
+        {
+            if (argsParser.hasHelpOption) return 0;
+
+            if (!opt.getParamValue(intVal,errMsg))
+            {
+                LOG_ERR_OPT<<errMsg<<"\n";
+                return -1;
+            }
+
+            if (intVal<0)
+            {
+                LOG_ERR_OPT<<"invalid option value (--json-indent)"<<"\n";
+                return -1;
+            }
+            
+            jsonIndent = (unsigned)intVal;
+            return 0;
+        }
+
         else if ( opt.setParam("?MODE",true)
                || opt.isOption("overwrite") || opt.isOption('Y') 
                // || opt.setParam("VAL",true)

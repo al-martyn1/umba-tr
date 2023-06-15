@@ -73,8 +73,10 @@ umba::SimpleFormatter umbaLogStreamNul(&nulWriter);
 bool umbaLogGccFormat   = false; // true;
 bool umbaLogSourceInfo  = false;
 
-bool bOverwrite    = false;
-bool bForce        = false;
+bool bOverwrite         = false;
+bool bForce             = false;
+
+unsigned jsonIndent     = 2;
 
 std::string               outputFilename;
 std::string               substCategoryName;
@@ -477,7 +479,7 @@ int main(int argc, char* argv[])
     if (!errCount || bForce)
     {
         
-        std::string finalTrText = marty_tr::tr_serialize_translations(marty_tr::tr_get_all_translations(), 2 /* indent */);
+        std::string finalTrText = marty_tr::tr_serialize_translations(marty_tr::tr_get_all_translations(), jsonIndent /* indent */);
 
         if (outputFileType!=umba::cli_tool_helpers::IoFileType::stdoutFile)
         {
