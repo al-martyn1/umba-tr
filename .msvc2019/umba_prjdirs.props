@@ -1,12 +1,12 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Import Project=".\props\umba_common.props" />
-  <Import Project=".\props\umba_3dp_boost.props" />
-  <Import Project=".\props\umba_3dp_llvm.props" />
-  <Import Project=".\props\umba_3dp_yaml_cpp.props" />
-  <Import Project=".\props\umba_3dp_gtest.props" />
-  <Import Project=".\props\umba_3dp_jinja2cpp.props" />
-  <Import Project=".\props\umba_local_common_prjdirs.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_common.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_3dp_boost.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_3dp_llvm.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_3dp_yaml_cpp.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_3dp_gtest.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_3dp_jinja2cpp.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_local_common_prjdirs.props" />
 
   <PropertyGroup>
                           

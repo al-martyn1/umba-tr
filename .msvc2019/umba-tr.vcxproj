@@ -4,10 +4,10 @@
     <ProjectGuid>{3D6DF49F-B8E5-4149-BD3B-66D02D68C200}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project=".\props\umba_project_configurations.props" />
-  <Import Project=".\props\umba_msvcver.props" />
-  <Import Project=".\props\umba_target_console.props" />
-  <Import Project=".\props\umba_config_matrix_common.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_project_configurations.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_msvcver.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_target_console.props" />
+  <Import Project="$(MSBuildThisFileDirectory)\..\.msvc\umba_config_matrix_common.props" />
   <!--Import Project=".\umba_config_matrix_qt.props" /-->
   <Import Project=".\umba_prjdirs.props" />
   <Import Project=".\umba_prjdefs.props" />
@@ -32,13 +32,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\umba-tr\umba-tr.cpp" />
-    <ClCompile Include="..\_libs\sfmt\umba_lout.cpp" />
-    <ClCompile Include="..\_libs\encoding\encoding.cpp" />
-    <ClCompile Include="..\_libs\encoding\compact_enc_det\compact_enc_det.cc" />
-    <ClCompile Include="..\_libs\encoding\compact_enc_det\compact_enc_det_hint_code.cc" />
-    <ClCompile Include="..\_libs\encoding\util\encodings\encodings.cc" />
-    <ClCompile Include="..\_libs\encoding\util\languages\languages.cc" />
   </ItemGroup>
+  <Import Project="$(UMBA_LOCAL_LIBS_ROOT)\umba\.msvc\sources.props" />
+  <Import Project="$(UMBA_LOCAL_LIBS_ROOT)\sfmt\.msvc\sources.props" />
+  <Import Project="$(UMBA_LOCAL_LIBS_ROOT)\encoding\.msvc\sources.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
