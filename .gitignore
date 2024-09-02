@@ -7,3 +7,4 @@ _libs/sfmt
 _libs/umba
 
 /.out
+*.user
