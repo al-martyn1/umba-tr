@@ -24,6 +24,7 @@
 #include "umba/scope_exec.h"
 #include "umba/macro_helpers.h"
 #include "umba/macros.h"
+#include "umba/shellapi.h"
 
 #include "marty_cpp/marty_cpp.h"
 #include "marty_cpp/sort_includes.h"
@@ -140,10 +141,22 @@ int main(int argc, char* argv[])
     if (umba::isDebuggerPresent())
     {
         argsParser.args.clear();
-        argsParser.args.push_back("@../umba-tr.rsp");
-        argsParser.args.push_back("../test-tr.json");
+        argsParser.args.push_back("--overwrite");
 
-        //argsParser.args.push_back("@..\\make_sources_brief.rsp");
+        std::string cwd;
+        std::string rootPath = umba::shellapi::getDebugAppRootFolder(&cwd);
+        std::cout << "App Root Path: " << rootPath << "\n";
+        std::cout << "Working Dir  : " << cwd << "\n";
+
+        argsParser.args.push_back("--scan="+rootPath+"/_libs/marty_format/_enums/tr");
+        argsParser.args.push_back("--include-files=*.json");
+        argsParser.args.push_back(rootPath+"/tests/enum-translations.json");
+
+        // argsParser.args.push_back("@../umba-tr.rsp");
+        // argsParser.args.push_back("../test-tr.json");
+        //--overwrite --scan=. --include-files=tr-*.json enum-translations.json
+
+        // argsParser.args.push_back("@..\\make_sources_brief.rsp");
         // argsParser.args.push_back(umba::string_plus::make_string(""));
         // argsParser.args.push_back(umba::string_plus::make_string(""));
         // argsParser.args.push_back(umba::string_plus::make_string(""));
@@ -194,11 +207,13 @@ int main(int argc, char* argv[])
         }
     }
 
+    auto &logStream = argsParser.quet ? umbaLogStreamNul : umbaLogStreamMsg;
+
     // appConfig.scanPaths = inputs;
     std::vector<std::string> foundFiles, excludedFiles;
     std::set<std::string>    foundExtentions;
     //umba::scanners::scanFolders( appConfig, argsParser.quet ? umbaLogStreamNul : umbaLogStreamMsg, foundFiles, excludedFiles, foundExtentions);
-    umba::scanners::scanFolders( appConfig, umbaLogStreamNul, foundFiles, excludedFiles, foundExtentions);
+    umba::scanners::scanFolders( appConfig, logStream, foundFiles, excludedFiles, foundExtentions);
 
     // umba::cli_tool_helpers::IoFileType outputFileType = umba::cli_tool_helpers::IoFileType::nameEmpty;
 
