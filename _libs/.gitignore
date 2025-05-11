@@ -1,6 +1,8 @@
 encoding
 marty_cpp
+marty_format
 marty_tr
+marty_utf
 marty_yaml_toml_json
 nlohmann
 sfmt

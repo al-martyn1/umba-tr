@@ -1,0 +1,23 @@
+{
+  "configurations" : 
+  [
+    {
+      "name": "Host App Debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${command:cmake.launchTargetPath}",
+      "cwd": "${command:cmake.launchTargetDirectory}",
+      "args": [],
+      "stopAtEntry": false,
+      "environment": [],
+      "externalConsole": true,
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "preLaunchTask": "build",
+      "presentation" : {
+          "group": "host_app"
+      }
+    }
+  ],
+  "version" : "0.2.0"
+}

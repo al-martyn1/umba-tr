@@ -24,7 +24,7 @@ std::string makeAbsPath( std::string p )
     std::string basePath;
 
     if (optFiles.empty())
-        basePath = umba::filesys::getCurrentDirectory<std::string>();
+        basePath = umba::filesys::getCurrentDirectory();
     else
         basePath = umba::filename::getPath(optFiles.top());
 
@@ -46,6 +46,7 @@ int operator()( const std::string                               &a           //!
               )
 {
     //using namespace marty::clang::helpers;
+    UMBA_USED(fBuiltin);
 
     std::string dppof = "Don't parse predefined options from ";
 
@@ -55,7 +56,7 @@ int operator()( const std::string                               &a           //!
         std::string strVal;
         int intVal;
         //unsigned uintVal;
-        std::size_t szVal;
+        std::size_t szVal; UMBA_USED(szVal);
         bool boolVal;
 
         if (opt.name.empty())
@@ -184,14 +185,14 @@ int operator()( const std::string                               &a           //!
             marty_tr::ELangTagFormat tmp = marty_tr::enum_deserialize(strVal, marty_tr::ELangTagFormat::invalid);
             switch(tmp)
             {
-                //case marty_tr::ELangTagFormat::invalid           : break;
                 case marty_tr::ELangTagFormat::langTag           : break;
-                //case marty_tr::ELangTagFormat::langTagNeutral    : break;
-                //case marty_tr::ELangTagFormat::langTagNeutralAuto: break;
                 case marty_tr::ELangTagFormat::langId            : break;
                 case marty_tr::ELangTagFormat::langIdFull        : break;
                 case marty_tr::ELangTagFormat::langIdX           : break;
                 case marty_tr::ELangTagFormat::langIdFullX       : break;
+                case marty_tr::ELangTagFormat::invalid           : [[fallthrough]];
+                case marty_tr::ELangTagFormat::langTagNeutral    : [[fallthrough]];
+                case marty_tr::ELangTagFormat::langTagNeutralAuto: [[fallthrough]];
                 default:
                     LOG_ERR_OPT<<"invalid LANGTAGFORMAT value: '"<<strVal<<"'"<<"\n";
                     return -1;

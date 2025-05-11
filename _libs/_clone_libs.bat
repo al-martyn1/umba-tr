@@ -24,9 +24,14 @@ goto DO_CLONE
 set PREFIX=git@%BASE%:%ACC%
 
 :DO_CLONE
-git clone %PREFIX%/umba_mm_mod_encodings.git   %~dp0\encoding
-git clone %PREFIX%/marty_cpp.git          %~dp0\marty_cpp
-git clone %PREFIX%/marty_tr.git           %~dp0\marty_tr
-git clone %PREFIX%/marty_yaml_toml_json.git    %~dp0\marty_yaml_toml_json
-git clone %PREFIX%/umba_mm_mod_sfmt.git   %~dp0\sfmt
-git clone %PREFIX%/umba_mm_mod_umba.git   %~dp0\umba
+git clone %PREFIX%/umba_mm_mod_encodings.git                     %~dp0\encoding
+git clone %PREFIX%/marty_cpp.git                                 %~dp0\marty_cpp
+git clone %PREFIX%/marty_format.git                              %~dp0\marty_format
+git clone %PREFIX%/marty_tr.git                                  %~dp0\marty_tr
+git clone %PREFIX%/marty_utf.git                                 %~dp0\marty_utf
+git clone --recurse-submodules %PREFIX%/marty_yaml_toml_json.git %~dp0\marty_yaml_toml_json
+git clone --recurse-submodules %PREFIX%/forks-nlohmann-json.git  %~dp0\nlohmann
+git clone %PREFIX%/umba_mm_mod_sfmt.git                          %~dp0\sfmt
+git clone %PREFIX%/umba_mm_mod_umba.git                          %~dp0\umba
+git clone %PREFIX%/forks-jbeder-yaml-cpp.git                     %~dp0\yaml-cpp
+
