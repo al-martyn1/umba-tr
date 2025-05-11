@@ -162,7 +162,7 @@ int operator()( const std::string                               &a           //!
             return 0;
         }
 
-        else if ( opt.setParam("LANGTAGFORMAT",true)
+        else if ( opt.setParam("LANGTAGFORMAT",umba::command_line::OptionType::optString)
                || opt.isOption("lang-tag-format") || opt.isOption('T') 
                // || opt.setParam("VAL",true)
                || opt.setDescription( "Set language tag format for output. LANGTAGFORMAT can be one of:\n"
